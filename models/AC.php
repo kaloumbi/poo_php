@@ -1,4 +1,9 @@
 <?php 
+
+namespace App\Mdoel;
+
+use App\Model\User;
+
 class AC extends User{
 
 
@@ -15,7 +20,31 @@ class AC extends User{
         return [];
     }
     public function __construct(){
-        $this->role='ROLE_AC';
+        parent::$role='ROLE_AC';
         $this->inscription=[];
     }
+
+
+    //Redefinition 
+    public static function findAll(): array
+    {
+        $db=parent::database();
+        $db->connexionBD();
+        $sql="select id,`nom_complet`,`role`,`login`,`password` from".parent::table()." where role like 'ROLE_AC'";
+        $result=$db->executeSelect($sql);
+        $db->closeConnexion();
+        return $result;
+
+    }
+
+    public  function insert():int{
+        $db=parent::database();
+        $db->connexionBD();
+        //Requete non preparee dont la variable est injectee lors de l'ecriture de la requete
+        $sql="INSERT INTO `personne`(`nom_complet`,`role`,`login`,`password`) VALUES(?,?,?,?) ";
+        $result = $db->executeUpdate($sql,[$this->nomComplet,parent::$role,$this->login,$this->password]);
+        $db->closeConnexion();
+        return $result;
+    }
+
 }

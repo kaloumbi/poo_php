@@ -1,16 +1,16 @@
 <?php
-//classes concretes produit des Objets
-//-- Methodes concretes:on connait sa definition
-//Classe abstraite qui ne produit pas d'OBJETS
-//--Methodes conretes: on connait sa definition
-//--Methodes abstraites: on ne connait pas sa definition 
-// Classe abstraite qui ne produit pas d'Objets
+namespace App\Model;
+use App\Core\Model;
+//Classe Finale(sterile) qui ne peuvent pas avoir de classe fille(une..)
 
+// require_once("../core/Model.php");
 
-abstract class Personne{
+abstract class Personne extends Model{
     //attributs d'instances
-    private int $id;
-    private string $nomComplet;
+    protected int $id;
+    protected string $nomComplet;
+    protected string $role;
+
     //attributs de classes ou static
     private static int $nbrePersonne;
 
@@ -68,7 +68,29 @@ abstract class Personne{
      *
      * @return  self
      */ 
-    public function setNbrePersonne(int $nbrePersonne):void{
+    public static function setNbrePersonne(int $nbrePersonne):void{
         self::$nbrePersonne = $nbrePersonne;
+    }
+
+ 
+
+    /**
+     * Get the value of role
+     */ 
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * Set the value of role
+     *
+     * @return  self
+     */ 
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
     }
 }

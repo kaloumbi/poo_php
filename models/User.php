@@ -1,4 +1,6 @@
 <?php
+namespace App\Model;
+
 abstract class User extends Personne{
 
     protected string $login;
@@ -68,4 +70,15 @@ abstract class User extends Personne{
 
         return $this;
     }
+
+    public static function findUserByLoginAndPassword(string $login,string $password):object|null{
+       return parent::findBy("select * from personne where login=? and password=?,[$login,$password],true");
+    }
+
+      //Redefinition 
+      public static function findAll(): array{
+
+        $sql="select * from".parent::table()." where role not like ?";
+        return parent::findBy($sql, ['ROLE_PROFESSEUR']);
+      }
 }

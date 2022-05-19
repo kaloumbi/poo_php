@@ -1,46 +1,26 @@
+
 <?php
 
-//1-Inclure le fichier de la classe
+use App\Model\Professeur;
+require("../vendor/autoload.php");
+require_once("../core/fonctions.php");
+require_once("../routes/route.web.php");
 
-require_once("../Models/Personne.php");
-require_once("../Models/User.php");
-require_once("../Models/AC.php");
-require_once("../Models/Inscription.php");
+/* $db = new Database();
+$db->connexionBD();
+$resuldb =$db->executeSelect("select * from personne");
+dd($resuldb); */
 
-//Creer l'Objet OU Instanciation
- //$pers1 = new Personne();
+$pro=new Professeur();
+$pro->setNomComplet('Peter Perry');
+$pro->setGrade('Institeur');
+/* $pro->insert(); */
+  /*  dd(Professeur::findAll()); */
 
-//appel methode de la classe nommee le constructeur __construct(); 
-//3-Donner un etat à un Objet
-//-> : operateur de portee d'instance(objet)
-//$pers1 -> interface de la classe (tous les attributs et methodes publics de la classe)
-
-
-/* $pers1->setId(1);
-$pers1->setNomComplet('Kaloumbi Diedhiou');
-
-$pers2 = new Personne();
-$pers2 = setId(2);
-$pers2->setNomComplet('Hill Perry');
-
-echo $pers1->getId();
-echo $pers1->getNomComplet();
+$chaine = str_replace("public","",$_SERVER["DOCUMENT_ROOT"]) ;
+// require_once("../routes/route.web.php");
 
 
-//Methodes static
-Personne::setNbrePersonne(12);
-echo Personne::getNbrePersonne(); */
 
-/* $pers2 = new User();
-$pers2 = setId(2)
-        ->setNomComplet('Hill Perry');
 
-$pers2->affiche(); */
-
-$ac=new AC();
-echo $ac->getRole();
-$ins = new Inscription();
-
-$ins->ac();
-$ins->anneeScolaire(); //recuperer anneeScolaire
 

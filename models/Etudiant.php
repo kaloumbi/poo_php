@@ -1,4 +1,7 @@
 <?php 
+
+namespace App\Model;
+
 class Etudiant extends User{
 
     private string $matricule;
@@ -6,7 +9,7 @@ class Etudiant extends User{
     private string $adresse;
 
     public function __construct(){
-        $this->role='ROLE_ETUDIANT';
+        self::$role='ROLE_ETUDIANT';
     }
 
     /**
@@ -68,4 +71,15 @@ class Etudiant extends User{
 
         return $this;
     }
+
+
+     //Redefinition 
+     public static function findAll(): array
+     {
+         $sql="select * from".parent::table()." where role like '".self::$role."'";
+         echo $sql;
+         return [];
+     }
+
+    
 }

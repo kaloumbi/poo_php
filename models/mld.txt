@@ -19,7 +19,7 @@ OneToMany-> ManyToOne
 *->1 //ManyToOne
 MLD => cle du faible qui migre au niveau du fort
 annee_scolaire(id,libelle)
-inscription(#annee_id)
+inscription(#annee_id,ac_id,etudiant_id,classe_id,annee_id)
 
 ManyToMany -> ManyToOne =>
 classe(id,libelle,filiere,niveau)
@@ -40,5 +40,186 @@ select
 
 Chaque table ou classe aura au moins les methodes comme insert(),delete(),update()
 
-L'INTERFACE
-Elle va nous permettre de factorise
+L'INTERFACE: nom-argument-type de retour=signature de l'interface
+Elle va nous permettre de factorise un ensemble de methodes communes à plusieurs 
+Un ensemble de classes qui ne se partagent que des methodes
+On ne change jamais la signature des mehtodes definies dans l'interface
+Dans une interface, on n'a que des methodes abstraites(dont on ne connait pas la definition mais on sait qu'elle existe)
+
+RELATION DE REALISATION
+C'est une relation entre les classes et l'interface
+
+IMPLELMENTATION ou REDEFINITION(on herite et on change la methode)
+Si on a besoin des methodes de l'interface, on fait une implementation en transformant les methodes abstraite à des concretes(class implements interface)
+Quand une classe implemente une interface, elle herite de toutes ses methodes ou fonctions
+->et deux choix sont possibles:
+1)elle implemente ou rend concretes l'ensemble des methodes de l'interface
+        ->UN PROBLEME VA EXISTER SI L'ON A SEULEMENT BESOIN DE DEUX METHODES SUR L'ENSEMBLES DES METHODES
+                ->SOLUTION:creation d'une CLASSE D'IMPLELMENTATION implementant directement l'interface
+2)elle devient une class abstraite(peut contenir à la fois methode abstraites et concretes et elle est non instanciable:pas d'objet) 
+
+CLASS:
+On cree une classe Quand toutes les classe sont du meme type et partageant des memes methodes et des memes attributs.
+
+REQUETTES:
+findAll: permet de recuperer toutes les valeurs de la table
+findById: permet de recuperer un element à travers son Id
+findBy:permet d'ecrire toutes les autres requettes
+
+
+
+METHODES D'INSTANCES;
+C'est toutes les methodes ayant besoin de la valeur des attributs de l'objet(etat de objet) pour s'executer
+Elles peuvent utiliser les attributs statiques et  d'instance exple:self::$table || this->table;
+
+METHODES:
+Une fonction statique ne peut appeler que des attributs statiques
+METHODES STATIQUES:
+Elles ne peuvent utiliser que des attributs statiques exple:self::$table
+C'est toutes methodes ne pouvant pas avoir besoin de la valeur des attributs de l'objet(etat objet)
+
+Pour se connecter On utilise findBy
+
+
+
+//EXPLICATIONS
+//Creer l'Objet OU Instanciation
+ //$pers1 = new Personne();
+
+//appel methode de la classe nommee le constructeur __construct(); 
+//3-Donner un etat à un Objet
+//-> : operateur de portee d'instance(objet)
+//$pers1 -> interface de la classe (tous les attributs et methodes publics de la classe)
+
+
+/* $pers1->setId(1);
+$pers1->setNomComplet('Kaloumbi Diedhiou');
+
+$pers2 = new Personne();
+$pers2 = setId(2);
+$pers2->setNomComplet('Hill Perry');
+
+echo $pers1->getId();
+echo $pers1->getNomComplet();
+
+
+//Methodes static
+Personne::setNbrePersonne(12);
+echo Personne::getNbrePersonne(); */
+
+/* $pers2 = new User();
+$pers2 = setId(2)
+        ->setNomComplet('Hill Perry');
+
+$pers2->affiche(); */
+
+
+//echo $ac->getRole();
+//$ins = new Inscription();
+
+//$ins->ac();
+//$ins->anneeScolaire(); //recuperer anneeScolaire
+
+
+
+
+
+
+
+
+
+
+PARTIE II
+
+/*    //Redefinition 
+    public static function findAll(): array
+    {
+        $sql="select * from personne where role like '".$this->$role."'";
+        return [];
+    }
+ */
+
+
+ //classes concretes produit des Objets
+//-- Methodes concretes:on connait sa definition
+//Classe abstraite qui ne produit pas d'OBJETS
+//--Methodes conretes: on connait sa definition
+//--Methodes abstraites: on ne connait pas sa definition 
+// Classe abstraite qui ne produit pas d'Objets
+
+
+
+SELF AND PARENT
+self: pour un attribut statique non herité
+parent: pour un
+
+
+INDEX.PHP
+
+//$personne = new Personne();//Personne => personne
+echo Personne::table();
+echo User::table();
+echo RP::table();
+
+Professeur::delete(1);
+// User::findAll(); //select * from personne where role not like ROLE_PROFESSEUR
+// $ac=new AC();
+// AC::findAll(); //tous les ac
+// Professeur::findAll(); //select * from personne where role like ROLE_PROFESSEUR
+
+
+ROUTER:
+role_router :IL reçoit la request(GET ou POST)
+il prend l'URL et fait sa correspondance en un controller et de dire l'action a executer dans ce controller
+il permet de prendre l'uri et un tableau qui contient deux valeurs :le controller et l'action à executer qui doit etre obligatoirement dans le controller
+il specifique à chaque action
+il cherche le controller correspondant et d'executer l'action
+
+LE CHEMIN RELATIF ET ABSOLU DES ROUTES
+//Le chemin Relatif SecurityController =>use App\Controller\SecurityController;
+//Le chemin Absolu App\Controller\SecurityController ou SecurityController::class;
+//Definir les routes
+
+LES FONCTION EN PHP
+array_values(): permet de reinitialiser les index.
+extract($data): permet d'acceder les donnees a partir d'une cle
+
+
+CONTROLLER:
+Pour les controllers, on cree autant de controllers que de models
+Il est charge par le router
+Tout Controller doit etre capable de charger une vue
+
+URI: Uniforme Ressource Indicator
+        il permet au router de savoir quelle est l'action qu'il doit executer
+
+INJECTION:
+
+
+
+
+SQL:
+//insert
+    //update
+    //delete
+
+    //selectAll() //select * from table;
+    //selectById() //select * from table where id=1;
+    //selectAll()
+
+
+     //Redefinition 
+    //  public static function findAll(): array
+    //  {
+       
+    //     $sql="select * from ".parent::table()." where role like ? ";
+    //     return parent::findBy($sql,['ROLE_PROFESSEUR']);
+    //  }
+    /*  public static function findAll(): array
+     {
+       
+        $sql="select `nom_complet`,`role`,`grade` from".parent::table()." where role like ? ";
+        return parent::findBy($sql,['ROLE_PROFESSEUR']);
+     } */
+
+

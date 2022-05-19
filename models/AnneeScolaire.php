@@ -1,5 +1,8 @@
 <?php
-class AnneeScolaire{
+namespace App\Mdoel;
+use App\Core\Model;
+require_once("../core/Model.php");
+class AnneeScolaire extends Model{
     //fonctions navigayionnelles
 
 
@@ -7,4 +10,7 @@ class AnneeScolaire{
     public function inscriptions():array{
         return [];
     }
+
+
+    
 }

@@ -1,0 +1,19 @@
+{
+    "name": "paterne/poo_php",
+    "autoload": {
+        "psr-4": {
+            "App\\Core\\": "core/",
+            "App\\Model\\": "models/",
+            "App\\Controller\\": "controllers/",
+            "App\\Exception\\": "exceptions/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kaloumbi"
+        }
+    ],
+    "require": {
+
+    }
+}
