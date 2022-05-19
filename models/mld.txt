@@ -1,0 +1,44 @@
+MLD
+Heritage
+DEUX APPROCHES
+
+personne(id,nom_complet,role,login,password,grade,matricule,adresse,sexe)
+-SingleTable: Toutes les classes qui participent dans l'heritage seront dans une seule Table
+-Joined:Cree autant de Table que de classe mais la cle de la classe mere
+        migre comme cle etrangere au niveau des classes filles
+
+personne(id,nom_complet,role,login,password,grade,matricule,adresse,sexe)
+user(login,password,#personne_id)
+rp(#personne_id)
+ac(#personne_id)
+professeur(grade,#personne_id)
+etudiant(matricule,adresse,sexe,#personne_id)
+
+OneToMany-> ManyToOne
+1->* //OneToMany
+*->1 //ManyToOne
+MLD => cle du faible qui migre au niveau du fort
+annee_scolaire(id,libelle)
+inscription(#annee_id)
+
+ManyToMany -> ManyToOne =>
+classe(id,libelle,filiere,niveau)
+professeur_classe(#classe,#personne_id)
+
+
+//Type Requete
+
+//Requete de Mis a jour=> change l'etat de la Table
+//retourner toujours un entier => nbre de ligne modifiee au niveau de la Table
+insert
+update
+delete
+
+//retourne des donnees => Objet, tableau
+select
+
+
+Chaque table ou classe aura au moins les methodes comme insert(),delete(),update()
+
+L'INTERFACE
+Elle va nous permettre de factorise
