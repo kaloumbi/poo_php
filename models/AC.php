@@ -20,7 +20,7 @@ class AC extends User{
         return [];
     }
     public function __construct(){
-        parent::$role='ROLE_AC';
+        $this->role='ROLE_AC';
         $this->inscription=[];
     }
 
@@ -28,10 +28,10 @@ class AC extends User{
     //Redefinition 
     public static function findAll(): array
     {
-        $db=parent::database();
+        $db=self::database();
         $db->connexionBD();
-        $sql="select id,`nom_complet`,`role`,`login`,`password` from".parent::table()." where role like 'ROLE_AC'";
-        $result=$db->executeSelect($sql);
+        $sql="select * from  ".parent::table()." where role like ?";
+        $result = $db->executeSelect($sql,['ROLE_AC']);
         $db->closeConnexion();
         return $result;
 

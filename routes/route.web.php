@@ -2,14 +2,15 @@
 //1-Inclure le fichier de la classe
 
 use App\Core\Router;
+use App\Controller\AcController;
+use App\Controller\RpController;
 use App\Controller\ClasseController;
 use App\Controller\ModuleController;
 use App\Controller\DemandeController;
+use App\Controller\EtudiantController;
 use App\Controller\PersonneController;
 use App\Controller\SecurityController;
 use App\Controller\ProfesseurController;
-use App\Controller\RpController;
-use App\Controller\AcController;
 use App\Exception\RouteNotFoundException;
 
 //Definir les routes =>Ajout des routes dans le tableau
@@ -24,6 +25,10 @@ $router->route('/demande',[DemandeController::class,"listerDemande"]);
 $router->route('/module',[ModuleController::class,"listeModule"]);
 $router->route('/rp',[RpController::class,"listeRp"]);
 $router->route('/ac',[AcController::class,"listeAc"]);
+$router->route('/etudiant',[EtudiantController::class,"listeEtudiant"]);
+
+//ajouter des user
+$router->route('/ajout-prof',[ProfesseurController::class,"ajouterProf"]);
 
 
 // dd($_SERVER['REQUEST_URL']);

@@ -22,7 +22,7 @@ class RP extends User{
         $db=self::database();
         $db->connexionBD();
         $sql="select * from  ".parent::table()." where role like ?";
-        $result = $db->executeSelect($sql,['ROLE_AC']);
+        $result = $db->executeSelect($sql,['ROLE_RP']);
         $db->closeConnexion();
         return $result;
     }

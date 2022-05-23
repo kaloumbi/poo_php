@@ -1,6 +1,7 @@
 <?php
 namespace App\Core;
 
+use App\Controller\SecurityController;
 use App\Exception\RouteNotFoundException;
 
 class Router{
@@ -37,8 +38,17 @@ class Router{
 
         }else{
             
-            // dd("error");
-             throw new RouteNotFoundException();
+
+            if($this->request->getUri()[0]==""){
+// die("cwkjl");
+                $ctrlsec=new SecurityController($this->request);
+                call_user_func(array($ctrlsec, "authentification"));
+
+            }else{
+                // dd("error");
+                throw new RouteNotFoundException();
+            }
+            
         }    
     }
 }

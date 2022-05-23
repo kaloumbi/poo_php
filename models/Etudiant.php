@@ -4,12 +4,13 @@ namespace App\Model;
 
 class Etudiant extends User{
 
+    
     private string $matricule;
     private string $sexe;
     private string $adresse;
 
     public function __construct(){
-        self::$role='ROLE_ETUDIANT';
+        $this->role='ROLE_ETUDIANT';
     }
 
     /**
@@ -74,12 +75,14 @@ class Etudiant extends User{
 
 
      //Redefinition 
-     public static function findAll(): array
-     {
-         $sql="select * from".parent::table()." where role like '".self::$role."'";
-         echo $sql;
-         return [];
-     }
+     public static function findAll():array{
+        $db=self::database();
+        $db->connexionBD();
+        $sql="select * from  ".parent::table()." where role like ?";
+        $result = $db->executeSelect($sql,['ROLE_ETUDIANT']);
+        $db->closeConnexion();
+        return $result;
+    }
 
     
 }

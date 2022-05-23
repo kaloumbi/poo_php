@@ -11,10 +11,10 @@ class Request{
 
 
     public function isGET():bool{
-        return $_SERVER['REQUEST_URL']=="GET";
+        return $_SERVER['REQUEST_METHOD']=="GET";
     }
 
     public function isPOST():bool{
-        return $_SERVER['REQUEST_URL']=="POST";
+        return $_SERVER['REQUEST_METHOD']=="POST";
     }
 }
